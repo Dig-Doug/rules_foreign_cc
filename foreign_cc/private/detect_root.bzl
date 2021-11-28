@@ -20,6 +20,10 @@ def detect_root(source):
     # Find topmost directory by searching for the file.dirname that is a
     # prefix of all other files.
     for file in sources:
+        if file.dirname == ".":
+            # This can happen if the rule is in the root directory of a repo and referencing it's own files
+            root = "."
+            break
         if root == None or root.startswith(file.dirname):
             root = file.dirname
 
